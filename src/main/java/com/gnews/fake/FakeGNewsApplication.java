@@ -7,11 +7,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class FakeGNewsApplication {
-	// ToDo This is a code smell!!
-	// Another code smell
-	// Another code smell
-	// Another code smell
-	// Tudo Certo ✅
+	// ToDo: ✅
 	public static void main(String[] args) {
 		SpringApplication.run(FakeGNewsApplication.class, args);
 	}
