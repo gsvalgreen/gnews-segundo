@@ -11,6 +11,7 @@ public class FakeGNewsApplication {
 	// Another code smell
 	// Another code smell
 	// Another code smell
+	// Tudo Certo ✅
 	public static void main(String[] args) {
 		SpringApplication.run(FakeGNewsApplication.class, args);
 	}
