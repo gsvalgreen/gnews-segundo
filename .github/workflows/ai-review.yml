@@ -24,8 +24,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOOGLE_AI_STUDIO.GEMINI_API_KEY: ${{ secrets.AI_API_KEY }} # Funciona com Gemini via proxy ou OpenAI nativo
           response_language: "pt_BR"
-          config.model: "gemini/gemini-1.5-flash" # Ajuste para o modelo configurado
-          config.fallback_models: '["gemini/gemini-1.5-flash"]'
+          config.model: "gemini/gemini-2.5-flash" # Ajuste para o modelo configurado
+          config.fallback_models: '["gemini-2.5-flash"]'
           github_action_config.auto_review: "true"
           github_action_config.auto_describe: "true"
           github_action_config.auto_improve: "true"
