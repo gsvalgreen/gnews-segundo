@@ -2,14 +2,16 @@ name: AI Code Review
 
 on:
   pull_request:
-    types: [opened, synchronize,reopened]
+    types: [opened, synchronize, reopened]
+  issue_comment:
 
 jobs:
   review:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: write # Necessário para comentar no PR
+      issues: write
+      pull-requests: write
+      contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -17,13 +19,17 @@ jobs:
           fetch-depth: 0
 
       - name: AI Reviewer
-        uses: anc95/ChatGPT-CodeReview@main # Action que orquestra a revisão
+        uses: qodo-ai/pr-agent@main # Action que orquestra a revisão
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.AI_API_KEY }} # Funciona com Gemini via proxy ou OpenAI nativo
-          LANGUAGE: Portuguese
-          MODEL: gpt-4o # Ajuste para o modelo configurado
-          PROMPT: |
+          GOOGLE_AI_STUDIO.GEMINI_API_KEY: ${{ secrets.AI_API_KEY }} # Funciona com Gemini via proxy ou OpenAI nativo
+          response_language: "pt_BR"
+          config.model: "gemini/gemini-3-pro-preview" # Ajuste para o modelo configurado
+          config.fallback_models: '["gemini/gemini-1.5-flash"]'
+          github_action_config.auto_review: "true"
+          github_action_config.auto_describe: "true"
+          github_action_config.auto_improve: "true"
+          pr_reviewer.extra_instructions: |
             Aja como um Engenheiro de Segurança Sênior (DevSecOps). 
             Analise o DIFF deste Pull Request buscando:
             1. Vulnerabilidades OWASP Top 10 (especialmente SQL Injection e Insecure Deserialization).
